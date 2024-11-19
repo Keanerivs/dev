@@ -1,0 +1,39 @@
+name: NPM Audit
+
+on:
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18' # Using Node.js version 18 (LTS)
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run npm audit - High Severity
+        run: npm audit --audit-level=high
+
+      - name: Run npm audit - All Levels (JSON Output)
+        run: npm audit --json
+
+      - name: Save JSON Output as Artifact
+        run: |
+          npm audit --json > audit-report.json
+        # Upload the JSON file for further analysis
+      - name: Upload audit report
+        uses: actions/upload-artifact@v3
+        with:
+          name: npm-audit-report
+          path: audit-report.json
