@@ -17,7 +17,7 @@
     "config": "^3.3.12",
     "csv-parser": "^3.0.0",
     "drizzle-kit": "^0.27.2",
-    "drizzle-orm": "^0.36.1",
+    "drizzle-orm": "^0.36.4",
     "express": "^4.21.1",
     "hono": "^4.6.9",
     "moment": "^2.30.1",
